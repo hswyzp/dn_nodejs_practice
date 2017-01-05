@@ -5,17 +5,15 @@ var rountConfig = {
     "/eat" : "eat",
     "/drink" : "drink",
     "/play" : "play",
-    "/happy" : "happy"
+    "/happy" : "happy",
+    "/submit" : "submit"
 };
 
-exports.rount = function(hanlders,pathName,query){
+exports.rount = function(hanlders,pathName,request,response){
     if(typeof hanlders[rountConfig[pathName]]  === "function"){
-        if(query){
-            return hanlders[rountConfig[pathName]](query);
-        }else{
-            return hanlders[rountConfig[pathName]]();
-        }
+        hanlders[rountConfig[pathName]](request,response);
     }else{
-        return "404 I Can't find the Page!";
+        response.write('<div style="width:100%;height:45px;line-height:45px;color:red;text-align:center;font-size:20px;">404 I Can\'t find the Page!</div>');
+        response.end();
     }
 };

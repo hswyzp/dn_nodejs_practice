@@ -1,19 +1,27 @@
-function result(oldStr,newStr){
-    return newStr ? newStr : oldStr;
-}
+var fs = require("fs");
 
-exports.eat = function(str){
-    return "eat " + result("goodfood",str) + "!";
+exports.eat = function(request,response){
+    response.write("eat goodfood!");
+    response.end();
 };
-exports.drink = function(str){
-    return "drink " + result("Alcohol",str) + "!";
+exports.drink = function(request,response){
+    response.write("drink Alcohol!");
+    response.end();
 };
-exports.play = function(str){
-    return "play " + result("Gime",str) + "!";
+exports.play = function(request,response){
+    response.write("play Gime!");
+    response.end();
 };
-exports.happy = function(str){
-    return "happy " + result("every day",str) + "!";
+exports.happy = function(request,response){
+    response.write("happy every day!");
+    response.end();
 };
-exports.default = function(str){
-    return "hello nodejs word!";
+exports.default = function(request,response){
+    var html = fs.readFileSync("../template/form.html");
+    response.write(html);
+    response.end();
+};
+exports.submit = function(request,response){
+    request.setEncoding("utf8")
+    response.end();
 }
